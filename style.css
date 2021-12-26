@@ -35,10 +35,12 @@ body {
     /* width: 33%; */
     /* height: 33%; */
 }
+.blankTile {
+    visibility: hidden;
+}
 .a {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-    visibility: hidden;
 }
 .b {
     grid-column: 2 / 3;
