@@ -1,3 +1,79 @@
 body {
     background-color: ivory;
 }
+
+.myNav {
+    background-color: red;
+
+}
+.center {
+    display: flex;
+    justify-content: center;
+}
+.gameSquare {
+    display: flex;
+    justify-content: center;
+    background-color: orange;
+
+}
+
+.tileContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    background-color: yellow;
+    height: 55vh;
+    width: 55vh;
+    margin: auto;
+}
+
+.tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: green;
+    /* width: 33%; */
+    /* height: 33%; */
+}
+.a {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    visibility: hidden;
+}
+.b {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+.c {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+}
+.d {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+.e {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+.f {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+}
+.g {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+}
+.h {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+}
+.i {
+    grid-column: 3 / 4;
+    grid-row: 3 / 4;
+}
+.gameButtons {
+    display: flex;
+    justify-content: center;
+}
+
