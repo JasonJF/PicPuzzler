@@ -38,39 +38,39 @@ body {
 .blankTile {
     visibility: hidden;
 }
-.a {
+.p0 {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
 }
-.b {
+.p1 {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
 }
-.c {
+.p2 {
     grid-column: 3 / 4;
     grid-row: 1 / 2;
 }
-.d {
+.p3 {
     grid-column: 1 / 2;
     grid-row: 2 / 3;
 }
-.e {
+.p4 {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
 }
-.f {
+.p5 {
     grid-column: 3 / 4;
     grid-row: 2 / 3;
 }
-.g {
+.p6 {
     grid-column: 1 / 2;
     grid-row: 3 / 4;
 }
-.h {
+.p7 {
     grid-column: 2 / 3;
     grid-row: 3 / 4;
 }
-.i {
+.p8 {
     grid-column: 3 / 4;
     grid-row: 3 / 4;
 }
