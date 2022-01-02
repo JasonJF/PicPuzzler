@@ -1,3 +1,6 @@
+:root {
+    --animationSpeed: 0.2s;
+}
 body {
     background-color: ivory;
 }
@@ -6,10 +9,12 @@ body {
     background-color: red;
 
 }
+
 .center {
     display: flex;
     justify-content: center;
 }
+
 .gameSquare {
     display: flex;
     justify-content: center;
@@ -18,9 +23,8 @@ body {
 }
 
 .tileContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    display: flex;
+    position: relative;
     background-color: yellow;
     height: 55vh;
     width: 55vh;
@@ -28,54 +32,71 @@ body {
 }
 
 .tile {
-    display: flex;
+    display: block;
+    position: absolute;
+    background-color: lime;
+    height: calc(100%/3);
+    width: calc(100%/3);
+    text-align: center;
     align-items: center;
+    align-content: center;
     justify-content: center;
-    background-color: green;
-    /* width: 33%; */
-    /* height: 33%; */
+    -webkit-transition: all var(--animationSpeed) ease;
+    -moz-transition: all var(--animationSpeed) ease;
+    -o-transition: all var(--animationSpeed) ease;
+    transition: all var(--animationSpeed) ease;
 }
+
 .blankTile {
     visibility: hidden;
 }
+
 .p0 {
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
+    top: 0;
+    left: 0%;
 }
+
 .p1 {
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
+    top: 0;
+    left: calc(100%/3);
 }
+
 .p2 {
-    grid-column: 3 / 4;
-    grid-row: 1 / 2;
+    top: 0;
+    left: calc(100%*2/3);
 }
+
 .p3 {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
+    top: calc(100%/3);
+    left: 0;
 }
+
 .p4 {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
+    top: calc(100%/3);
+    left: calc(100%/3);
 }
+
 .p5 {
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
+    top: calc(100%/3);
+    left: calc(100%*2/3);
 }
+
 .p6 {
-    grid-column: 1 / 2;
-    grid-row: 3 / 4;
+    top: calc(100%*2/3);
+    left: 0;
 }
+
 .p7 {
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
+    top: calc(100%*2/3);
+    left: calc(100%/3);
 }
+
 .p8 {
-    grid-column: 3 / 4;
-    grid-row: 3 / 4;
+    top: calc(100%*2/3);
+    left: calc(100%*2/3);
 }
+
 .gameButtons {
     display: flex;
     justify-content: center;
 }
-
