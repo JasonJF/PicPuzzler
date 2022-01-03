@@ -29,8 +29,15 @@ body {
     height: 55vh;
     width: 55vh;
     margin: auto;
+    background-image: "/images/colourful_puppy";
 }
-
+#tile_bg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
 .tile {
     display: block;
     position: absolute;
@@ -45,6 +52,7 @@ body {
     -moz-transition: all var(--animationSpeed) ease;
     -o-transition: all var(--animationSpeed) ease;
     transition: all var(--animationSpeed) ease;
+    z-index: 1;
 }
 
 .blankTile {

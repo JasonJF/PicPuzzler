@@ -1,22 +1,44 @@
+//load image to canvas
+var canvas = $(".tileContainer2")[0];
+var context = canvas.getContext('2d');
+var imageObj = new Image();
+
+imageObj.onload = function () {
+    // draw cropped image
+    var sourceX = 150;
+    var sourceY = 0;
+    var sourceWidth = 150;
+    var sourceHeight = 150;
+    var destWidth = sourceWidth;
+    var destHeight = sourceHeight;
+    var destX = canvas.width / 2 - destWidth / 2;
+    var destY = canvas.height / 2 - destHeight / 2;
+
+    context.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+};
+// imageObj.src = "images/colourful_puppy.jpg";
+imageObj.src = "https://cdn.pixabay.com/photo/2018/07/01/00/59/dog-3508706_1280.jpg";
+
+
 //default position classes
 const position = {
-    "p0": ["p1","p3"],
-    "p1": ["p0","p2","p4"],
-    "p2": ["p1","p5"],
-    "p3": ["p0","p4","p6"],
-    "p4": ["p1","p3","p5","p7"],
-    "p5": ["p2","p4","p8"],
-    "p6": ["p3","p7"],
-    "p7": ["p4","p6","p8"],
-    "p8": ["p5","p7"]
+    "p0": ["p1", "p3"],
+    "p1": ["p0", "p2", "p4"],
+    "p2": ["p1", "p5"],
+    "p3": ["p0", "p4", "p6"],
+    "p4": ["p1", "p3", "p5", "p7"],
+    "p5": ["p2", "p4", "p8"],
+    "p6": ["p3", "p7"],
+    "p7": ["p4", "p6", "p8"],
+    "p8": ["p5", "p7"]
 }
 
 //add event listener to tiles
-$(".tile").on("click", function() {
-    
-    let clickedTile = $( this );
+$(".tile").on("click", function () {
+
+    let clickedTile = $(this);
     //get class of clicked tile
-    let myClass = $( this ).attr("class");
+    let myClass = $(this).attr("class");
     //strip away the tile class
     let trimClass = myClass.replace("tile ", "");
     // console.log(trimClass);
@@ -25,8 +47,8 @@ $(".tile").on("click", function() {
     let adjTiles = position[trimClass];
     adjTiles.forEach(adjTile => {
         // console.log(adjTile);
-       
-        if($("." + adjTile).hasClass("blankTile")){
+
+        if ($("." + adjTile).hasClass("blankTile")) {
             emptyTile = $("." + adjTile);
             // console.log(adjTile + " is blank.")
             //move the tile
@@ -36,7 +58,7 @@ $(".tile").on("click", function() {
 });
 
 //move the tile
-function moveTile(tile, emptyTile){
+function moveTile(tile, emptyTile) {
     // let regex = \w\d;
     let tileId = tile[0].id;
     let tileClass = tile.attr("class").replace("tile ", "");
