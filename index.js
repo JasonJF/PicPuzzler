@@ -1,23 +1,55 @@
-//load image to canvas
-var canvas = $(".p1")[0];
-var context = canvas.getContext('2d');
-var imageObj = new Image();
+//function to load images onto game tiles
 
-imageObj.onload = function () {
-    // draw cropped image
-    var sourceX = 0;
-    var sourceY = 0;
-    var sourceWidth = 150;
-    var sourceHeight = 150;
-    var destWidth = canvas.width;
-    var destHeight = canvas.height;
-    var destX = 0;
-    var destY = 0;
-    context.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
-};
-// imageObj.src = "images/colourful_puppy.jpg";
-// imageObj.src = "https://cdn.pixabay.com/photo/2018/07/01/00/59/dog-3508706_1280.jpg";
-imageObj.src = "https://cdn.pixabay.com/photo/2021/11/17/11/02/flowers-6803234_1280.png";
+function setImageTiles() {
+    const positionArray = Object.keys(position);
+    var imageObj = new Image();
+    // imageObj.src = "images/colourful_puppy.jpg";
+    imageObj.src = "https://cdn.pixabay.com/photo/2018/07/01/00/59/dog-3508706_1280.jpg";
+    // imageObj.src = "https://cdn.pixabay.com/photo/2021/11/17/11/02/flowers-6803234_1280.png";
+    imageObj.onload = function () {
+
+        //variables to determine which block to draw in
+        let x = 0;
+        let y = 0;
+
+        for (let i = 0; i < positionArray.length; i++) {
+            console.log(positionArray[i]);
+
+            //increment x, y
+            if (x >= 3) {
+                x = 0;
+                y++;
+            }
+
+            //load image to canvas
+            var canvas = $(`.${positionArray[i]}`)[0];
+            var context = canvas.getContext('2d');
+            let imgWidth = imageObj.naturalWidth;
+            let imageHeight = imageObj.naturalHeight;
+
+
+
+            // draw cropped image
+            var sourceX = x * (imgWidth / 3);
+            var sourceY = y * (imageHeight / 3);
+            var sourceWidth = (imgWidth / 3);
+            var sourceHeight = (imageHeight / 3);
+            var destWidth = canvas.width;
+            var destHeight = canvas.height;
+            var destX = 0;
+            var destY = 0;
+            context.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+
+            x++
+        }
+    };
+}
+
+
+
+
+
+
 
 
 //default position classes
@@ -32,6 +64,9 @@ const position = {
     "p7": ["p4", "p6", "p8"],
     "p8": ["p5", "p7"]
 }
+
+//set images on tiles
+setImageTiles();
 
 //add event listener to tiles
 $(".tile").on("click", function () {
@@ -56,6 +91,8 @@ $(".tile").on("click", function () {
         }
     });
 });
+
+
 
 //move the tile
 function moveTile(tile, emptyTile) {
