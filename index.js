@@ -1,23 +1,23 @@
 //load image to canvas
-var canvas = $(".tileContainer2")[0];
+var canvas = $(".p1")[0];
 var context = canvas.getContext('2d');
 var imageObj = new Image();
 
 imageObj.onload = function () {
     // draw cropped image
-    var sourceX = 150;
+    var sourceX = 0;
     var sourceY = 0;
     var sourceWidth = 150;
     var sourceHeight = 150;
-    var destWidth = sourceWidth;
-    var destHeight = sourceHeight;
-    var destX = canvas.width / 2 - destWidth / 2;
-    var destY = canvas.height / 2 - destHeight / 2;
-
+    var destWidth = canvas.width;
+    var destHeight = canvas.height;
+    var destX = 0;
+    var destY = 0;
     context.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
 };
 // imageObj.src = "images/colourful_puppy.jpg";
-imageObj.src = "https://cdn.pixabay.com/photo/2018/07/01/00/59/dog-3508706_1280.jpg";
+// imageObj.src = "https://cdn.pixabay.com/photo/2018/07/01/00/59/dog-3508706_1280.jpg";
+imageObj.src = "https://cdn.pixabay.com/photo/2021/11/17/11/02/flowers-6803234_1280.png";
 
 
 //default position classes
