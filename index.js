@@ -22,8 +22,9 @@ function setImageTiles() {
             }
 
             //load image to canvas
-            var canvas = $(`.${positionArray[i]}`)[0];
-            var context = canvas.getContext('2d');
+            // let canvas = $(`.${positionArray[i]}`)[0];
+            let canvas = document.getElementById(i);
+            let context = canvas.getContext('2d');
             let imgWidth = imageObj.naturalWidth;
             let imageHeight = imageObj.naturalHeight;
 
@@ -42,6 +43,7 @@ function setImageTiles() {
 
             x++
         }
+        shuffleBoard();
     };
 }
 
@@ -65,8 +67,14 @@ const position = {
     "p8": ["p5", "p7"]
 }
 
+const defaultPositions = ["blankTile","p0","p1","p2","p3","p4","p5","p6","p7","p8"];
+
 //set images on tiles
+
+let shuffledArray = shuffleArray(defaultPositions);
+// createCanvasTiles();
 setImageTiles();
+
 
 //add event listener to tiles
 $(".tile").on("click", function () {
@@ -113,4 +121,38 @@ function moveTile(tile, emptyTile) {
 
     tile.addClass(emptyClass);
     emptyTile.addClass(tileClass);
+}
+
+//shuffle array
+function shuffleArray(array) {
+
+    let shuffledPositions = [...array];
+
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledPositions[i], shuffledPositions[j]] = [shuffledPositions[j], shuffledPositions[i]];
+
+    }
+    return shuffledPositions;
+    }
+
+//create canvas elements
+function createCanvasTiles() {
+
+    let container = document.getElementsByClassName('tileContainer');
+    // console.log(container);
+    for(let i = 0; i < shuffledArray.length; i++) {
+        let tile = document.createElement("canvas");
+        tile.setAttribute('id', i);
+        tile.setAttribute('class', "tile " + shuffledArray[i]);
+        console.log(tile);
+        container[0].appendChild(tile);
+    }
+}
+
+function shuffleBoard() {
+    for(let i = 0; i < shuffledArray.length - 1; i++) {
+        let tile = document.getElementById(i);
+        tile.setAttribute('class', "tile " + shuffledArray[i]);
+    }
 }
