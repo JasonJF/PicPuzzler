@@ -67,7 +67,20 @@ const position = {
     "p8": ["p5", "p7"]
 }
 
-const defaultPositions = ["blankTile","p0","p1","p2","p3","p4","p5","p6","p7","p8"];
+//default position IDs
+// const position = {
+//     "0": ["1", "3"],
+//     "1": ["0", "2", "4"],
+//     "2": ["1", "5"],
+//     "3": ["0", "4", "6"],
+//     "4": ["1", "3", "5", "7"],
+//     "5": ["2", "4", "8"],
+//     "6": ["3", "7"],
+//     "7": ["4", "6", "8"],
+//     "8": ["5", "7"]
+// }
+
+const defaultPositions = ["p0 blankTile","p1","p2","p3","p4","p5","p6","p7","p8"];
 
 //set images on tiles
 
@@ -82,6 +95,7 @@ $(".tile").on("click", function () {
     let clickedTile = $(this);
     //get class of clicked tile
     let myClass = $(this).attr("class");
+    let clickedTileId = $(this).attr("id");
     //strip away the tile class
     let trimClass = myClass.replace("tile ", "");
     // console.log(trimClass);
@@ -128,7 +142,7 @@ function shuffleArray(array) {
 
     let shuffledPositions = [...array];
 
-    for (let i = array.length - 1; i > 0; i--) {
+    for (let i = 0; i < array.length; i++) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffledPositions[i], shuffledPositions[j]] = [shuffledPositions[j], shuffledPositions[i]];
 
@@ -151,8 +165,14 @@ function createCanvasTiles() {
 }
 
 function shuffleBoard() {
-    for(let i = 0; i < shuffledArray.length - 1; i++) {
+    for(let i = 0; i < shuffledArray.length; i++) {
         let tile = document.getElementById(i);
+        console.log(tile);
+        //get class of element at id i
+
+        //compare with class at shuffledArray[i]
+
+        //if not equal get id of tile at shuffledArray[i]
         tile.setAttribute('class', "tile " + shuffledArray[i]);
     }
 }
