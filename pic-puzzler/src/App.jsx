@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import handleTileClick from "./scripts/gameLogic";
+import { handleTileClick, initializeBoard } from "./scripts/gameLogic";
 
 function App() {
+  useEffect(() => {
+    initializeBoard();
+  }, []);
   let tiles = [];
   //create tiles
   for (let i = 0; i < 9; i++) {
