@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { handleTileClick, initializeBoard } from "./scripts/gameLogic";
 
