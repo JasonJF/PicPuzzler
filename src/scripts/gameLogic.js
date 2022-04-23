@@ -8,7 +8,7 @@ function initializeBoard() {
 }
 //Load default tile positions
 const defaultPositions = [
-  "p0 blankTile",
+  "p0",
   "p1",
   "p2",
   "p3",
@@ -87,19 +87,19 @@ function setImageTiles() {
 
       x++;
     }
+
+    
     shuffleBoard();
+    //set canvas id=0 to blankTile
+    let blankTile = document.getElementById(0);
+    blankTile.classList.add("blankTile");
   };
 }
 function shuffleBoard() {
   for (let i = 0; i < shuffledArray.length; i++) {
     let tile = document.getElementById(i);
-    // console.log(tile);
-    //get class of element at id i
-
-    //compare with class at shuffledArray[i]
-
-    //if not equal get id of tile at shuffledArray[i]
     tile.setAttribute("class", "tile " + shuffledArray[i]);
+    // tile.setAttribute("class", "tile " + defaultPositions[i]);
   }
 }
 
