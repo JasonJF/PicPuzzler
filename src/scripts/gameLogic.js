@@ -166,6 +166,9 @@ function moveTile_2(tile, emptyTile) {
   gameBoardCurrent[tile2Index] = parseInt(tileToMove);
 
   redrawBoard(gameBoardCurrent);
+
+  //check if completed
+  checkIfComplete();
   // getCurrentBoardState();
 }
 
@@ -188,6 +191,12 @@ function getCurrentBoardState() {
 function resetBoard() {
   gameBoardCurrent = [...gameBoardInitial];
   redrawBoard(gameBoardInitial);
+}
+
+function checkIfComplete() {
+  if (gameBoardCurrent == defaultPositions) {
+    console.log("You Won!");
+  }
 }
 
 export { handleTileClick, initializeBoard, getCurrentBoardState, resetBoard };

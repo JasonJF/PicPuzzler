@@ -43,12 +43,15 @@ function App() {
               })}
             </div>
           </div>
-          <div className="gameButtons">
-            <button className="btn btn-lg btn-warning" onClick={resetBoard}>
+          <div className="gameButtons m-2">
+            <button
+              className="btn btn-lg btn-warning mx-2"
+              onClick={resetBoard}
+            >
               Reset
             </button>
             <button
-              className="btn btn-lg btn-success"
+              className="btn btn-lg btn-success mx-2"
               onClick={getCurrentBoardState}
             >
               Get Board
