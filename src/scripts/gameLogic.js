@@ -1,36 +1,36 @@
 //gameLogic.js
 //This file contains all the game logic functions
+import isSolvable from "./solver";
+
+let gameBoardInitial = [];
+let gameBoardCurrent = [];
 
 //Initialization
 function initializeBoard() {
   console.log("Initializing Board...");
+  //create a shuffled array
+  shuffleBoard();
+  gameBoardCurrent = [...gameBoardInitial];
   setImageTiles();
 }
 //Load default tile positions
-const defaultPositions = [
-  "p0 blankTile",
-  "p1",
-  "p2",
-  "p3",
-  "p4",
-  "p5",
-  "p6",
-  "p7",
-  "p8",
-];
+const defaultPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-//create a shuffled array
-let shuffledArray = shuffleArray(defaultPositions);
+async function shuffleArray(array) {
+  let solvable = false;
+  let shuffledPositions = [];
 
-function shuffleArray(array) {
-  let shuffledPositions = [...array];
+  while (!solvable) {
+    shuffledPositions = [...array];
 
-  for (let i = 0; i < array.length; i++) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffledPositions[i], shuffledPositions[j]] = [
-      shuffledPositions[j],
-      shuffledPositions[i],
-    ];
+    for (let i = 0; i < array.length; i++) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledPositions[i], shuffledPositions[j]] = [
+        shuffledPositions[j],
+        shuffledPositions[i],
+      ];
+    }
+    solvable = isSolvable(shuffledPositions);
   }
   return shuffledPositions;
 }
@@ -87,20 +87,15 @@ function setImageTiles() {
 
       x++;
     }
-    shuffleBoard();
+    //set canvas id=0 to blankTile
+    let blankTile = document.getElementById(0);
+    blankTile.classList.add("blankTile");
   };
 }
-function shuffleBoard() {
-  for (let i = 0; i < shuffledArray.length; i++) {
-    let tile = document.getElementById(i);
-    // console.log(tile);
-    //get class of element at id i
 
-    //compare with class at shuffledArray[i]
-
-    //if not equal get id of tile at shuffledArray[i]
-    tile.setAttribute("class", "tile " + shuffledArray[i]);
-  }
+async function shuffleBoard() {
+  gameBoardInitial = await shuffleArray(defaultPositions);
+  redrawBoard(gameBoardInitial);
 }
 
 //default position classes
@@ -135,24 +130,16 @@ function handleTileClick(e) {
       let tile = $("." + trimClass);
       // console.log(adjTile + " is blank.");
       //move the tile
-      moveTile(tile, emptyTile);
+      moveTile_2(tile, emptyTile);
+      // moveTile(tile, emptyTile);
     }
   });
 }
 
 //handle tile movement
 function moveTile(tile, emptyTile) {
-  // console.log(tile);
-  // // let regex = \w\d;
-  // let tileId = tile[0].id;
   let tileClass = tile.attr("class").replace("tile ", "");
-  // let emptyId = emptyTile[0].id;
   let emptyClass = emptyTile.attr("class").match(/\w\d/)[0];
-  // //
-  // console.log(tileId);
-  // console.log(tileClass);
-  // console.log(emptyId);
-  // console.log(emptyClass);
 
   // //swap classes
   tile.removeClass(tileClass);
@@ -161,5 +148,55 @@ function moveTile(tile, emptyTile) {
   tile.addClass(emptyClass);
   emptyTile.addClass(tileClass);
 }
+function moveTile_2(tile, emptyTile) {
+  // console.log(gameBoardInitial);
 
-export { handleTileClick, initializeBoard };
+  if (gameBoardCurrent.length == 0) {
+    gameBoardCurrent = [...gameBoardInitial];
+  }
+  // console.log(gameBoardCurrent);
+  let tileToMove = tile.attr("class").match(/\d/)[0];
+  let blankTile = emptyTile.attr("class").match(/\d/)[0];
+
+  //get index of tiles
+  let tile1Index = gameBoardCurrent.indexOf(parseInt(tileToMove));
+  let tile2Index = gameBoardCurrent.indexOf(parseInt(blankTile));
+  //swap tiles
+  gameBoardCurrent[tile1Index] = parseInt(blankTile);
+  gameBoardCurrent[tile2Index] = parseInt(tileToMove);
+
+  redrawBoard(gameBoardCurrent);
+
+  //check if completed
+  checkIfComplete();
+  // getCurrentBoardState();
+}
+
+function redrawBoard(newTilePositions) {
+  for (let i = 0; i < newTilePositions.length; i++) {
+    let tile = document.getElementById(i);
+    tile.setAttribute("class", "tile " + "p" + newTilePositions[i]);
+    // tile.setAttribute("class", "tile " + defaultPositions[i]);
+  }
+  //set canvas id=0 to blankTile
+  let blankTile = document.getElementById(0);
+  blankTile.classList.add("blankTile");
+}
+
+function getCurrentBoardState() {
+  console.log("This is the current board state:");
+  console.log(gameBoardCurrent);
+}
+
+function resetBoard() {
+  gameBoardCurrent = [...gameBoardInitial];
+  redrawBoard(gameBoardInitial);
+}
+
+function checkIfComplete() {
+  if (gameBoardCurrent == defaultPositions) {
+    console.log("You Won!");
+  }
+}
+
+export { handleTileClick, initializeBoard, getCurrentBoardState, resetBoard };

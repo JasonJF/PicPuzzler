@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { handleTileClick, initializeBoard } from "./scripts/gameLogic";
+import CopyrightFooter from "./components/CopyrightFooter";
+import {
+  handleTileClick,
+  initializeBoard,
+  getCurrentBoardState,
+  resetBoard,
+} from "./scripts/gameLogic";
 
 function App() {
   useEffect(() => {
@@ -37,13 +43,24 @@ function App() {
               })}
             </div>
           </div>
-          <div className="gameButtons">
-            <button className="btn btn-lg btn-warning">Reset</button>
+          <div className="gameButtons m-2">
+            <button
+              className="btn btn-lg btn-warning mx-2"
+              onClick={resetBoard}
+            >
+              Reset
+            </button>
+            <button
+              className="btn btn-lg btn-success mx-2"
+              onClick={getCurrentBoardState}
+            >
+              Get Board
+            </button>
           </div>
         </div>
         {/* Footer */}
         <div className="footer center">
-          <p>Copyright Jason JF</p>
+          <CopyrightFooter />
         </div>
       </div>
     </div>
