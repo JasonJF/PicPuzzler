@@ -2,12 +2,15 @@
 //This file contains all the game logic functions
 import isSolvable from "./solver";
 
+let gameBoardInitial = [];
+let gameBoardCurrent = [];
+
 //Initialization
 function initializeBoard() {
   console.log("Initializing Board...");
   //create a shuffled array
   shuffleBoard();
-
+  gameBoardCurrent = [...gameBoardInitial];
   setImageTiles();
 }
 //Load default tile positions
@@ -91,12 +94,8 @@ function setImageTiles() {
 }
 
 async function shuffleBoard() {
-  let boardToShuffle = await shuffleArray(defaultPositions);
-  for (let i = 0; i < boardToShuffle.length; i++) {
-    let tile = document.getElementById(i);
-    tile.setAttribute("class", "tile " + "p" + boardToShuffle[i]);
-    // tile.setAttribute("class", "tile " + defaultPositions[i]);
-  }
+  gameBoardInitial = await shuffleArray(defaultPositions);
+  redrawBoard(gameBoardInitial);
 }
 
 //default position classes
@@ -131,24 +130,16 @@ function handleTileClick(e) {
       let tile = $("." + trimClass);
       // console.log(adjTile + " is blank.");
       //move the tile
-      moveTile(tile, emptyTile);
+      moveTile_2(tile, emptyTile);
+      // moveTile(tile, emptyTile);
     }
   });
 }
 
 //handle tile movement
 function moveTile(tile, emptyTile) {
-  // console.log(tile);
-  // // let regex = \w\d;
-  // let tileId = tile[0].id;
   let tileClass = tile.attr("class").replace("tile ", "");
-  // let emptyId = emptyTile[0].id;
   let emptyClass = emptyTile.attr("class").match(/\w\d/)[0];
-  // //
-  // console.log(tileId);
-  // console.log(tileClass);
-  // console.log(emptyId);
-  // console.log(emptyClass);
 
   // //swap classes
   tile.removeClass(tileClass);
@@ -157,5 +148,46 @@ function moveTile(tile, emptyTile) {
   tile.addClass(emptyClass);
   emptyTile.addClass(tileClass);
 }
+function moveTile_2(tile, emptyTile) {
+  // console.log(gameBoardInitial);
 
-export { handleTileClick, initializeBoard };
+  if (gameBoardCurrent.length == 0) {
+    gameBoardCurrent = [...gameBoardInitial];
+  }
+  // console.log(gameBoardCurrent);
+  let tileToMove = tile.attr("class").match(/\d/)[0];
+  let blankTile = emptyTile.attr("class").match(/\d/)[0];
+
+  //get index of tiles
+  let tile1Index = gameBoardCurrent.indexOf(parseInt(tileToMove));
+  let tile2Index = gameBoardCurrent.indexOf(parseInt(blankTile));
+  //swap tiles
+  gameBoardCurrent[tile1Index] = parseInt(blankTile);
+  gameBoardCurrent[tile2Index] = parseInt(tileToMove);
+
+  redrawBoard(gameBoardCurrent);
+  // getCurrentBoardState();
+}
+
+function redrawBoard(newTilePositions) {
+  for (let i = 0; i < newTilePositions.length; i++) {
+    let tile = document.getElementById(i);
+    tile.setAttribute("class", "tile " + "p" + newTilePositions[i]);
+    // tile.setAttribute("class", "tile " + defaultPositions[i]);
+  }
+  //set canvas id=0 to blankTile
+  let blankTile = document.getElementById(0);
+  blankTile.classList.add("blankTile");
+}
+
+function getCurrentBoardState() {
+  console.log("This is the current board state:");
+  console.log(gameBoardCurrent);
+}
+
+function resetBoard() {
+  gameBoardCurrent = [...gameBoardInitial];
+  redrawBoard(gameBoardInitial);
+}
+
+export { handleTileClick, initializeBoard, getCurrentBoardState, resetBoard };
