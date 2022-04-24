@@ -1,36 +1,33 @@
 //gameLogic.js
 //This file contains all the game logic functions
+import isSolvable from "./solver";
 
 //Initialization
 function initializeBoard() {
   console.log("Initializing Board...");
+  //create a shuffled array
+  shuffleBoard();
+
   setImageTiles();
 }
 //Load default tile positions
-const defaultPositions = [
-  "p0",
-  "p1",
-  "p2",
-  "p3",
-  "p4",
-  "p5",
-  "p6",
-  "p7",
-  "p8",
-];
+const defaultPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-//create a shuffled array
-let shuffledArray = shuffleArray(defaultPositions);
+async function shuffleArray(array) {
+  let solvable = false;
+  let shuffledPositions = [];
 
-function shuffleArray(array) {
-  let shuffledPositions = [...array];
+  while (!solvable) {
+    shuffledPositions = [...array];
 
-  for (let i = 0; i < array.length; i++) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffledPositions[i], shuffledPositions[j]] = [
-      shuffledPositions[j],
-      shuffledPositions[i],
-    ];
+    for (let i = 0; i < array.length; i++) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledPositions[i], shuffledPositions[j]] = [
+        shuffledPositions[j],
+        shuffledPositions[i],
+      ];
+    }
+    solvable = isSolvable(shuffledPositions);
   }
   return shuffledPositions;
 }
@@ -87,18 +84,17 @@ function setImageTiles() {
 
       x++;
     }
-
-    
-    shuffleBoard();
     //set canvas id=0 to blankTile
     let blankTile = document.getElementById(0);
     blankTile.classList.add("blankTile");
   };
 }
-function shuffleBoard() {
-  for (let i = 0; i < shuffledArray.length; i++) {
+
+async function shuffleBoard() {
+  let boardToShuffle = await shuffleArray(defaultPositions);
+  for (let i = 0; i < boardToShuffle.length; i++) {
     let tile = document.getElementById(i);
-    tile.setAttribute("class", "tile " + shuffledArray[i]);
+    tile.setAttribute("class", "tile " + "p" + boardToShuffle[i]);
     // tile.setAttribute("class", "tile " + defaultPositions[i]);
   }
 }

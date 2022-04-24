@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import CopyrightFooter from "./components/CopyrightFooter";
 import { handleTileClick, initializeBoard } from "./scripts/gameLogic";
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
         </div>
         {/* Footer */}
         <div className="footer center">
-          <p>Copyright Jason JF</p>
+          <CopyrightFooter />
         </div>
       </div>
     </div>
