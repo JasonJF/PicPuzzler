@@ -1,22 +1,14 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import CopyrightFooter from "./components/CopyrightFooter";
-import {
-  handleTileClick,
-  initializeBoard,
-  getCurrentBoardState,
-  resetBoard,
-} from "./scripts/gameLogic";
+import Gameboard from "./scripts/Gameboard";
+import { resetBoard, getCurrentBoardState } from "./scripts/gameLogic";
 
 function App() {
-  useEffect(() => {
-    initializeBoard();
-  }, []);
-  let tiles = [];
-  //create tiles
-  for (let i = 0; i < 9; i++) {
-    tiles.push(i);
-  }
+  const [score, setScore] = useState(0);
+  const updateScore = (scoreValue) => {
+    setScore(scoreValue);
+  };
   return (
     <div className="App">
       <div className="container pageWrapper">
@@ -27,7 +19,7 @@ function App() {
         {/* Main Content */}
         <div className="mainContent">
           <div className="scoreWrapper center"> Score : 0</div>
-          <div className="gameSquare">
+          {/* <div className="gameSquare">
             <div id="tileContainer" className="tileContainer">
               {tiles.map((tile, index) => {
                 return (
@@ -42,7 +34,8 @@ function App() {
                 );
               })}
             </div>
-          </div>
+          </div> */}
+          <Gameboard updateScore={updateScore} />
           <div className="gameButtons m-2">
             <button
               className="btn btn-lg btn-warning mx-2"
