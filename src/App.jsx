@@ -6,8 +6,12 @@ import { resetBoard, getCurrentBoardState } from "./scripts/gameLogic";
 
 function App() {
   const [score, setScore] = useState(0);
-  const updateScore = (scoreValue) => {
-    setScore(scoreValue);
+  const updateScore = () => {
+    setScore(score + 1);
+  };
+  const resetEverything = () => {
+    resetBoard();
+    setScore(0);
   };
   return (
     <div className="App">
@@ -18,28 +22,12 @@ function App() {
         </nav>
         {/* Main Content */}
         <div className="mainContent">
-          <div className="scoreWrapper center"> Score : 0</div>
-          {/* <div className="gameSquare">
-            <div id="tileContainer" className="tileContainer">
-              {tiles.map((tile, index) => {
-                return (
-                  <canvas
-                    key={index}
-                    id={tile}
-                    className="tile"
-                    onClick={handleTileClick}
-                  >
-                    {tile}
-                  </canvas>
-                );
-              })}
-            </div>
-          </div> */}
+          <div className="scoreWrapper center"> Score : {score}</div>
           <Gameboard updateScore={updateScore} />
           <div className="gameButtons m-2">
             <button
               className="btn btn-lg btn-warning mx-2"
-              onClick={resetBoard}
+              onClick={resetEverything}
             >
               Reset
             </button>

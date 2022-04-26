@@ -17,17 +17,19 @@ function Gameboard(props) {
   for (let i = 0; i < 9; i++) {
     tiles.push(i);
   }
+
+  function tileClick(e) {
+    if (handleTileClick(e)) {
+      updateScore();
+    }
+  }
+
   return (
     <div className="gameSquare">
       <div id="tileContainer" className="tileContainer">
         {tiles.map((tile, index) => {
           return (
-            <canvas
-              key={index}
-              id={tile}
-              className="tile"
-              onClick={handleTileClick}
-            >
+            <canvas key={index} id={tile} className="tile" onClick={tileClick}>
               {tile}
             </canvas>
           );

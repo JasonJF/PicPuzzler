@@ -113,6 +113,7 @@ const position = {
 
 //handleTileClick
 function handleTileClick(e) {
+  let tileMoved = false;
   let clickedTile = e.currentTarget.getAttribute("class");
   // console.log(e.target);
   let clickedClass = e.target.getAttribute("class");
@@ -131,9 +132,11 @@ function handleTileClick(e) {
       // console.log(adjTile + " is blank.");
       //move the tile
       moveTile_2(tile, emptyTile);
+      tileMoved = true;
       // moveTile(tile, emptyTile);
     }
   });
+  return tileMoved;
 }
 
 //handle tile movement
