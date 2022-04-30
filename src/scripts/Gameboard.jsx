@@ -4,10 +4,11 @@ import {
   initializeBoard,
   getCurrentBoardState,
   resetBoard,
+  checkIfComplete,
 } from "./gameLogic";
 
 function Gameboard(props) {
-  const { updateScore } = props;
+  const { updateScore, isComplete } = props;
 
   useEffect(() => {
     initializeBoard();
@@ -21,6 +22,9 @@ function Gameboard(props) {
   function tileClick(e) {
     if (handleTileClick(e)) {
       updateScore();
+      if (checkIfComplete()) {
+        isComplete();
+      }
     }
   }
 

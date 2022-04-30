@@ -1,6 +1,7 @@
 //gameLogic.js
 //This file contains all the game logic functions
 import isSolvable from "./solver";
+import isEqual from "lodash/isEqual";
 
 let gameBoardInitial = [];
 let gameBoardCurrent = [];
@@ -11,6 +12,8 @@ function initializeBoard() {
   //create a shuffled array
   shuffleBoard();
   gameBoardCurrent = [...gameBoardInitial];
+  // gameBoardCurrent = [1, 0, 2, 3, 4, 5, 6, 7, 8];
+  redrawBoard(gameBoardCurrent);
   setImageTiles();
 }
 //Load default tile positions
@@ -88,11 +91,13 @@ function setImageTiles() {
       x++;
     }
     //set canvas id=0 to blankTile
-    let blankTile = document.getElementById(0);
-    blankTile.classList.add("blankTile");
+    setBlankTile(0);
   };
 }
-
+function setBlankTile(tileId) {
+  let blankTile = document.getElementById(tileId);
+  blankTile.classList.add("blankTile");
+}
 async function shuffleBoard() {
   gameBoardInitial = await shuffleArray(defaultPositions);
   redrawBoard(gameBoardInitial);
@@ -197,9 +202,18 @@ function resetBoard() {
 }
 
 function checkIfComplete() {
-  if (gameBoardCurrent == defaultPositions) {
+  if (isEqual(gameBoardCurrent, defaultPositions)) {
     console.log("You Won!");
+    return true;
+  } else {
+    return false;
   }
 }
 
-export { handleTileClick, initializeBoard, getCurrentBoardState, resetBoard };
+export {
+  handleTileClick,
+  initializeBoard,
+  getCurrentBoardState,
+  resetBoard,
+  checkIfComplete,
+};
