@@ -204,6 +204,8 @@ function resetBoard() {
 function checkIfComplete() {
   if (isEqual(gameBoardCurrent, defaultPositions)) {
     console.log("You Won!");
+    let blankTile = document.getElementById(0);
+    blankTile.classList.remove("blankTile");
     return true;
   } else {
     return false;

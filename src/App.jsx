@@ -13,6 +13,7 @@ function App() {
   const resetEverything = () => {
     resetBoard();
     setScore(0);
+    setIsComplete(false);
   };
 
   const setCompleteToTrue = () => {
@@ -30,7 +31,11 @@ function App() {
           <div className="scoreWrapper center">
             {isComplete ? "You Win!" : `Score: ${score}`}
           </div>
-          <Gameboard updateScore={updateScore} isComplete={setCompleteToTrue} />
+          <Gameboard
+            updateScore={updateScore}
+            setCompleteToTrue={setCompleteToTrue}
+            isComplete={isComplete}
+          />
           <div className="gameButtons m-2">
             <button
               className="btn btn-lg btn-warning mx-2"

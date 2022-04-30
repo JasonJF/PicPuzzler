@@ -8,7 +8,7 @@ import {
 } from "./gameLogic";
 
 function Gameboard(props) {
-  const { updateScore, isComplete } = props;
+  const { updateScore, isComplete, setCompleteToTrue } = props;
 
   useEffect(() => {
     initializeBoard();
@@ -23,7 +23,7 @@ function Gameboard(props) {
     if (handleTileClick(e)) {
       updateScore();
       if (checkIfComplete()) {
-        isComplete();
+        setCompleteToTrue();
       }
     }
   }
@@ -39,6 +39,15 @@ function Gameboard(props) {
           );
         })}
       </div>
+      {isComplete ? (
+        <div className="tileContainer winOverlay">
+          <div className="winImage">
+            <p>You Win!</p>
+          </div>
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }
