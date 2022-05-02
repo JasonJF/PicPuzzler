@@ -1,110 +1,108 @@
 :root {
-    --animationSpeed: 0.2s;
+  --animationSpeed: 0.2s;
 }
 body {
-    background-color: ivory;
+  background-color: ivory;
 }
 
 .myNav {
-    background-color: red;
-
+  background-color: red;
 }
 
 .center {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .gameSquare {
-    display: flex;
-    justify-content: center;
-    background-color: orange;
-
+  display: flex;
+  justify-content: center;
+  background-color: orange;
 }
 
 .tileContainer {
-    display: flex;
-    position: relative;
-    background-color: yellow;
-    height: 55vh;
-    width: 55vh;
-    margin: auto;
-    background-image: "/images/colourful_puppy";
+  display: flex;
+  position: relative;
+  background-color: yellow;
+  height: 55vh;
+  width: 55vh;
+  margin: auto;
+  background-image: "/images/colourful_puppy";
 }
 #tile_bg {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 .tile {
-    display: block;
-    position: absolute;
-    background-color: lime;
-    height: calc(100%/3);
-    width: calc(100%/3);
-    text-align: center;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    -webkit-transition: all var(--animationSpeed) ease;
-    -moz-transition: all var(--animationSpeed) ease;
-    -o-transition: all var(--animationSpeed) ease;
-    transition: all var(--animationSpeed) ease;
-    z-index: 1;
+  display: block;
+  position: absolute;
+  background-color: lime;
+  height: calc(100% / 3);
+  width: calc(100% / 3);
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  -webkit-transition: all var(--animationSpeed) ease;
+  -moz-transition: all var(--animationSpeed) ease;
+  -o-transition: all var(--animationSpeed) ease;
+  transition: all var(--animationSpeed) ease;
+  z-index: 1;
 }
 
 .blankTile {
-    visibility: hidden;
-}
-
-.p0 {
-    top: 0;
-    left: 0%;
+  visibility: hidden;
 }
 
 .p1 {
-    top: 0;
-    left: calc(100%/3);
+  top: 0;
+  left: 0%;
 }
 
 .p2 {
-    top: 0;
-    left: calc(100%*2/3);
+  top: 0;
+  left: calc(100% / 3);
 }
 
 .p3 {
-    top: calc(100%/3);
-    left: 0;
+  top: 0;
+  left: calc(100% * 2 / 3);
 }
 
 .p4 {
-    top: calc(100%/3);
-    left: calc(100%/3);
+  top: calc(100% / 3);
+  left: 0;
 }
 
 .p5 {
-    top: calc(100%/3);
-    left: calc(100%*2/3);
+  top: calc(100% / 3);
+  left: calc(100% / 3);
 }
 
 .p6 {
-    top: calc(100%*2/3);
-    left: 0;
+  top: calc(100% / 3);
+  left: calc(100% * 2 / 3);
 }
 
 .p7 {
-    top: calc(100%*2/3);
-    left: calc(100%/3);
+  top: calc(100% * 2 / 3);
+  left: 0;
 }
 
 .p8 {
-    top: calc(100%*2/3);
-    left: calc(100%*2/3);
+  top: calc(100% * 2 / 3);
+  left: calc(100% / 3);
+}
+
+.p9 {
+  top: calc(100% * 2 / 3);
+  left: calc(100% * 2 / 3);
 }
 
 .gameButtons {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }

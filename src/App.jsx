@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import CopyrightFooter from "./components/CopyrightFooter";
 import Gameboard from "./scripts/Gameboard";
-import { resetBoard, getCurrentBoardState } from "./scripts/gameLogic";
+import {
+  resetBoard,
+  getCurrentBoardState,
+  initializeBoard,
+} from "./scripts/gameLogic";
 
 function App() {
   const [score, setScore] = useState(0);
@@ -19,6 +23,11 @@ function App() {
   const setCompleteToTrue = () => {
     setIsComplete(true);
   };
+  const newGame = () => {
+    setScore(0);
+    setIsComplete(false);
+    initializeBoard();
+  };
   return (
     <div className="App">
       <div className="container pageWrapper">
@@ -29,7 +38,7 @@ function App() {
         {/* Main Content */}
         <div className="mainContent">
           <div className="scoreWrapper center">
-            {isComplete ? "You Win!" : `Score: ${score}`}
+            {isComplete ? `Number of moves: ${score}` : `Score: ${score}`}
           </div>
           <Gameboard
             updateScore={updateScore}
@@ -39,9 +48,9 @@ function App() {
           <div className="gameButtons m-2">
             <button
               className="btn btn-lg btn-warning mx-2"
-              onClick={resetEverything}
+              onClick={isComplete ? newGame : resetEverything}
             >
-              Reset
+              {isComplete ? "Replay" : "Reset"}
             </button>
             <button
               className="btn btn-lg btn-success mx-2"

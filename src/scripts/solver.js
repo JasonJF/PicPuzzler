@@ -10,7 +10,7 @@ function countInversions(boardToSolve) {
     // console.log(element + " " + index);
     for (let i = index + 1; i < boardToSolve.length; i++) {
       let nextDigit = boardToSolve[i];
-      if (element == 0 || nextDigit == 0) {
+      if (element == 9 || nextDigit == 9) {
         // console.log("skip");
       } else {
         if (element > boardToSolve[i]) {

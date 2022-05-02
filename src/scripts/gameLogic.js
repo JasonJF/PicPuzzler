@@ -2,6 +2,7 @@
 //This file contains all the game logic functions
 import isSolvable from "./solver";
 import isEqual from "lodash/isEqual";
+import { indexOf } from "lodash";
 
 let gameBoardInitial = [];
 let gameBoardCurrent = [];
@@ -10,14 +11,15 @@ let gameBoardCurrent = [];
 function initializeBoard() {
   console.log("Initializing Board...");
   //create a shuffled array
-  shuffleBoard();
-  gameBoardCurrent = [...gameBoardInitial];
-  // gameBoardCurrent = [1, 0, 2, 3, 4, 5, 6, 7, 8];
+  // shuffleBoard();
+  // gameBoardCurrent = [...gameBoardInitial];
+  gameBoardCurrent = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   redrawBoard(gameBoardCurrent);
+  shuffleBoard();
   setImageTiles();
 }
 //Load default tile positions
-const defaultPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+const defaultPositions = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 async function shuffleArray(array) {
   let solvable = false;
@@ -62,6 +64,7 @@ function setImageTiles() {
 
       //load image to canvas
       // let canvas = $(`.${positionArray[i]}`)[0];
+      // let canvas = document.getElementById(i + 1);
       let canvas = document.getElementById(i + 1);
       let context = canvas.getContext("2d");
       let imgWidth = imageObj.naturalWidth;
@@ -100,20 +103,21 @@ function setBlankTile(tileId) {
 }
 async function shuffleBoard() {
   gameBoardInitial = await shuffleArray(defaultPositions);
+  gameBoardCurrent = [...gameBoardInitial];
   redrawBoard(gameBoardInitial);
 }
 
 //default position classes
 const position = {
-  p0: ["p1", "p3"],
-  p1: ["p0", "p2", "p4"],
-  p2: ["p1", "p5"],
-  p3: ["p0", "p4", "p6"],
-  p4: ["p1", "p3", "p5", "p7"],
-  p5: ["p2", "p4", "p8"],
-  p6: ["p3", "p7"],
-  p7: ["p4", "p6", "p8"],
-  p8: ["p5", "p7"],
+  p1: ["p2", "p4"],
+  p2: ["p1", "p3", "p5"],
+  p3: ["p2", "p6"],
+  p4: ["p1", "p5", "p7"],
+  p5: ["p2", "p4", "p6", "p8"],
+  p6: ["p3", "p5", "p9"],
+  p7: ["p4", "p8"],
+  p8: ["p5", "p7", "p9"],
+  p9: ["p6", "p8"],
 };
 
 //handleTileClick
@@ -163,8 +167,8 @@ function moveTile_2(tile, emptyTile) {
     gameBoardCurrent = [...gameBoardInitial];
   }
   // console.log(gameBoardCurrent);
-  let tileToMove = tile.attr("class").match(/\d/)[0];
-  let blankTile = emptyTile.attr("class").match(/\d/)[0];
+  let tileToMove = tile.attr("id").match(/\d/)[0];
+  let blankTile = emptyTile.attr("id").match(/\d/)[0];
 
   //get index of tiles
   let tile1Index = gameBoardCurrent.indexOf(parseInt(tileToMove));
@@ -183,7 +187,8 @@ function moveTile_2(tile, emptyTile) {
 function redrawBoard(newTilePositions) {
   for (let i = 0; i < newTilePositions.length; i++) {
     let tile = document.getElementById(i + 1);
-    tile.setAttribute("class", "tile " + "p" + newTilePositions[i]);
+    let newPosition = newTilePositions.indexOf(i + 1) + 1;
+    tile.setAttribute("class", "tile " + "p" + newPosition);
     // tile.setAttribute("class", "tile " + defaultPositions[i]);
   }
   //set canvas id=9 to blankTile
