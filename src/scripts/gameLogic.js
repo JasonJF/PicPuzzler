@@ -62,7 +62,7 @@ function setImageTiles() {
 
       //load image to canvas
       // let canvas = $(`.${positionArray[i]}`)[0];
-      let canvas = document.getElementById(i);
+      let canvas = document.getElementById(i + 1);
       let context = canvas.getContext("2d");
       let imgWidth = imageObj.naturalWidth;
       let imageHeight = imageObj.naturalHeight;
@@ -90,8 +90,8 @@ function setImageTiles() {
 
       x++;
     }
-    //set canvas id=0 to blankTile
-    setBlankTile(0);
+    //set canvas id=9to blankTile
+    // setBlankTile(9);
   };
 }
 function setBlankTile(tileId) {
@@ -182,17 +182,20 @@ function moveTile_2(tile, emptyTile) {
 
 function redrawBoard(newTilePositions) {
   for (let i = 0; i < newTilePositions.length; i++) {
-    let tile = document.getElementById(i);
+    let tile = document.getElementById(i + 1);
     tile.setAttribute("class", "tile " + "p" + newTilePositions[i]);
     // tile.setAttribute("class", "tile " + defaultPositions[i]);
   }
-  //set canvas id=0 to blankTile
-  let blankTile = document.getElementById(0);
-  blankTile.classList.add("blankTile");
+  //set canvas id=9 to blankTile
+  // let blankTile = document.getElementById(8);
+  // blankTile.classList.add("blankTile");
+
+  setBlankTile(9);
 }
 
 function getCurrentBoardState() {
   console.log("This is the current board state:");
+  isSolvable(gameBoardCurrent);
   console.log(gameBoardCurrent);
 }
 
@@ -204,7 +207,7 @@ function resetBoard() {
 function checkIfComplete() {
   if (isEqual(gameBoardCurrent, defaultPositions)) {
     console.log("You Won!");
-    let blankTile = document.getElementById(0);
+    let blankTile = document.getElementById(9);
     blankTile.classList.remove("blankTile");
     return true;
   } else {

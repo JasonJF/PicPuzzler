@@ -19,6 +19,7 @@ function countInversions(boardToSolve) {
       }
     }
   });
+  console.log(inversions);
   console.log(inversions.length);
   return inversions.length;
 }

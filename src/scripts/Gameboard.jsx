@@ -16,7 +16,7 @@ function Gameboard(props) {
   let tiles = [];
   //create tiles
   for (let i = 0; i < 9; i++) {
-    tiles.push(i);
+    tiles.push(i + 1);
   }
 
   function tileClick(e) {
