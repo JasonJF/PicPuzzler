@@ -9,11 +9,17 @@ function countInversions(boardToSolve) {
   boardToSolve.forEach((element, index) => {
     // console.log(element + " " + index);
     for (let i = index + 1; i < boardToSolve.length; i++) {
-      if (element > boardToSolve[i]) {
-        inversions.push(element + "-" + boardToSolve[i]);
+      let nextDigit = boardToSolve[i];
+      if (element == 9 || nextDigit == 9) {
+        // console.log("skip");
+      } else {
+        if (element > boardToSolve[i]) {
+          inversions.push(element + "-" + boardToSolve[i]);
+        }
       }
     }
   });
+  console.log(inversions);
   console.log(inversions.length);
   return inversions.length;
 }
