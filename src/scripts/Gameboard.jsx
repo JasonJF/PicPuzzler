@@ -1,4 +1,6 @@
 import { React, useState, useEffect } from "react";
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
 import {
   handleTileClick,
   initializeBoard,
@@ -9,6 +11,7 @@ import {
 
 function Gameboard(props) {
   const { updateScore, isComplete, setCompleteToTrue } = props;
+  const { width, height } = useWindowSize();
 
   useEffect(() => {
     initializeBoard();
@@ -30,6 +33,7 @@ function Gameboard(props) {
 
   return (
     <div className="gameSquare">
+      {isComplete && <Confetti width={width} height={height} />}
       <div id="tileContainer" className="tileContainer">
         {tiles.map((tile, index) => {
           return (
@@ -41,9 +45,7 @@ function Gameboard(props) {
       </div>
       {isComplete ? (
         <div className="tileContainer winOverlay">
-          <div className="winImage">
-            <p>You Win!</p>
-          </div>
+          <div className="winImage"></div>
         </div>
       ) : (
         <div></div>
