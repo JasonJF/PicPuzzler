@@ -40,20 +40,3 @@
 button {
   font-size: calc(10px + 2vmin);
 }
-.winOverlay {
-  z-index: 3;
-  position: absolute;
-  background-color: #19738770;
-  box-shadow: 0px 0px 24px 4px rgb(48 255 255 / 75%) inset;
-  -webkit-box-shadow: 0px 0px 24px 4px rgb(48 255 255 / 75%) inset;
-  -moz-box-shadow: 0px 0px 24px 4px rgba(48, 255, 255, 0.75) inset;
-}
-.winImage {
-  display: flex;
-  align-content: flex-end;
-  justify-content: center;
-  margin: auto;
-  font-family: monospace;
-  font-size: 5rem;
-  color: lawngreen;
-}
