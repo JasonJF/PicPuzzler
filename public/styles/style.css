@@ -4,6 +4,12 @@
 body {
   background-color: ivory;
 }
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
 
 .myNav {
   background-color: red;
@@ -17,17 +23,20 @@ body {
 .gameSquare {
   display: flex;
   justify-content: center;
-  background-color: orange;
+  /* background-color: orange; */
 }
 
 .tileContainer {
   display: flex;
   position: relative;
-  background-color: yellow;
+  background-color: grey;
   height: 55vh;
   width: 55vh;
   margin: auto;
   background-image: "/images/colourful_puppy";
+  padding: 1px;
+  border: 0.5rem solid #0dcaf0;
+  border-radius: 0.5rem;
 }
 #tile_bg {
   display: block;
@@ -51,6 +60,7 @@ body {
   -o-transition: all var(--animationSpeed) ease;
   transition: all var(--animationSpeed) ease;
   z-index: 1;
+  border-radius: 0.5rem;
 }
 
 .blankTile {
@@ -105,4 +115,25 @@ body {
 .gameButtons {
   display: flex;
   justify-content: center;
+}
+.winOverlay {
+  z-index: 3;
+  position: absolute;
+  background-color: #19738700;
+  box-shadow: 0px 0px 24px 4px rgb(48 255 255 / 75%) inset;
+  -webkit-box-shadow: 0px 0px 24px 4px rgb(48 255 255 / 75%) inset;
+  -moz-box-shadow: 0px 0px 24px 4px rgba(48, 255, 255, 0.75) inset;
+}
+.winImage {
+  display: flex;
+  align-content: flex-end;
+  justify-content: center;
+  margin: auto;
+  font-family: monospace;
+  font-size: 5rem;
+  color: lawngreen;
+}
+.scoreWrapper {
+  font-family: monospace;
+  font-size: 2rem;
 }

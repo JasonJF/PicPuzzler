@@ -11,6 +11,8 @@ import {
 function App() {
   const [score, setScore] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  const [confetti, setConfetti] = useState(false);
+
   const updateScore = () => {
     setScore(score + 1);
   };
@@ -22,6 +24,13 @@ function App() {
 
   const setCompleteToTrue = () => {
     setIsComplete(true);
+  };
+
+  const sprayConfetti = () => {
+    setConfetti(true);
+    setTimeout(() => {
+      setConfetti(false);
+    }, 3000);
   };
   const newGame = () => {
     setScore(0);
@@ -36,14 +45,16 @@ function App() {
           <p>PicPuzzler</p>
         </nav>
         {/* Main Content */}
+        <div className="scoreWrapper center">
+          {isComplete ? `Number of moves: ${score}` : `Score: ${score}`}
+        </div>
         <div className="mainContent">
-          <div className="scoreWrapper center">
-            {isComplete ? `Number of moves: ${score}` : `Score: ${score}`}
-          </div>
           <Gameboard
             updateScore={updateScore}
             setCompleteToTrue={setCompleteToTrue}
             isComplete={isComplete}
+            confetti={confetti}
+            setConfetti={setConfetti}
           />
           <div className="gameButtons m-2">
             <button
