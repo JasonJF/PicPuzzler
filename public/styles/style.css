@@ -35,7 +35,7 @@ body {
   margin: auto;
   background-image: "/images/colourful_puppy";
   padding: 1px;
-  border: 0.5rem solid #0dcaf0;
+  /* border: 0.5rem solid #0dcaf0; */
   border-radius: 0.5rem;
 }
 #tile_bg {

@@ -35,6 +35,7 @@ function App() {
   const newGame = () => {
     setScore(0);
     setIsComplete(false);
+    setConfetti(false);
     initializeBoard();
   };
   return (
